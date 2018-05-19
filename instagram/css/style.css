@@ -1,0 +1,23 @@
+body {
+  padding-top: 54px;
+  background: Beige;
+}
+
+p {
+	font-weight: bold;	
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.users {
+    margin-left: 3%;
+}
+
+.row {
+	margin-right: 0;
+	margin-left: 0;
+	}  
