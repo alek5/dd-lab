@@ -2,6 +2,8 @@ const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+require('bootstrap/dist/css/bootstrap.css');
+require('bootstrap');
 
 const config = {
 	watch: true,
@@ -40,7 +42,10 @@ const config = {
                     'style-loader',
                     'css-loader'
                 ]
-            }
+            },
+            { test: /\.scss$/, loaders: ['style', 'css', 'postcss', 'sass'] },
+      		{ test: /.jpe?g$|.gif$|.png$|.svg$|.woff$|.woff2$|.ttf$|.eot$/, loader: "url" },
+      		{ test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
 		]
 	},
 
@@ -53,7 +58,13 @@ const config = {
 
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, './src/index.html')
-		})
+		}),
+
+		new webpack.ProvidePlugin({   
+        	jQuery: 'jquery',
+        	$: 'jquery',
+        	jquery: 'jquery'
+    	})
 	],
 
 	devServer: {

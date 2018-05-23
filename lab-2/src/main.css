@@ -1,10 +1,44 @@
-* {
-    box-sizing: border-box;
+@import url('/node_modules/bootstrap/dist/css/bootstrap.css');
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
+body{
+    background: #e8e7e7;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-body {
-    background: #aaa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+h3{
+    font-family: 'Josefin Sans', sans-serif;
+    color:#428bca;
+}
+
+.box{
+    padding:60px 0px;
+}
+
+.box-part{
+    background:#FFF;
+    border-radius:10px;
+    padding:60px 10px;
+    margin:30px 0px;
+}
+
+img{
+    width:90px;
+    height:120px;
+    border-radius:50%;
+}
+
+.text{
+    margin:20px 0px;
+}
+
+.fa.fa-facebook, .fa.fa-github, .fa.fa-tumblr, .fa.fa-linkedin{
+    padding:0px 15px;
+    font-size:22px;
+    margin-top:10px;
+}
+
+.icons{
+    margin:0 auto;
+    display:table;
 }
