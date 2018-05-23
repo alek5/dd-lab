@@ -1,0 +1,1 @@
+const sumTwo = (x, y) => x + y;
