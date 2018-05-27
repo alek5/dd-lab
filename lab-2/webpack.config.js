@@ -2,10 +2,9 @@ const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-require('bootstrap/dist/css/bootstrap.css');
-require('bootstrap');
 
 const config = {
+	devtool: true,
 	watch: true,
 
     context: path.resolve(__dirname, 'src'),
@@ -59,12 +58,6 @@ const config = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, './src/index.html')
 		}),
-
-		new webpack.ProvidePlugin({   
-        	jQuery: 'jquery',
-        	$: 'jquery',
-        	jquery: 'jquery'
-    	})
 	],
 
 	devServer: {

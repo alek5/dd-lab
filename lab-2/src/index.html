@@ -3,6 +3,8 @@
    <head>
       <meta charset="UTF-8">
       <title>Webpack App</title>
+      <script src="//code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
    <body>
       <div class="box">
@@ -11,27 +13,55 @@
                <div class="col-lg-4 col-lg-offset-2 col-md-4 col-sm-4 col-xs-12">
                   <div class="box-part text-center">
                      <div class="title">
-                        <h3>John Doe</h3>
+                        <h3>Address book</h3>
                      </div>
                      <div class="text">
-                        <input type="text" placeholder="type something">
+                        <input type="text" placeholder="filter...">
+                     </div>
+                     <div id="users">
                      </div>
                   </div>
                </div>
                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="box-part text-center">
-                     <img class="profile" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?h=350&auto=compress&cs=tinysrgb" />
+                     <img id="avatar" class="profile" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?h=350&auto=compress&cs=tinysrgb" />
                      <div class="title">
-                        <h3>John Doe</h3>
+                        <h3 id="name">Alexandr</h3>
                      </div>
                      <div class="text">
-                        <span>Front End Developer</span>
+                        <span>email: <span id="email">Front End Developer</span></span>
+                     </div>
+                     <div class="text">
+                        <span>phone: <span id="phone">+7-123-456-789</span></span>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      </div>
+      
+      <script type="text/javascript">
+         $(function(){
+            let users = [];
+
+            $.getJSON('users.json', function(data) {
+               users = data;
+               data.forEach(function(item, i, data) {
+                  $('#users').append("<a href='#' class='user' data-id='"+item.id+"'>"+item.name+"</a>"+ "<br>");
+               });
+               
+            });
+
+            $(document.body).on('click', 'a.user', function(e){
+               e.preventDefault();
+               const user = users.filter((user) => $(this).data('id') === +user.id);
+               $("#name").text(user[0].name);
+               $("#email").text(user[0].email);
+               $("#phone").text(user[0].phone);
+               $("#avatar").attr('src', user[0].avatar);
+            })
+
+            
+      </script>
    </body>
 </html>
