@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const config = {
-	devtool: true,
 	watch: true,
 
     context: path.resolve(__dirname, 'src'),
