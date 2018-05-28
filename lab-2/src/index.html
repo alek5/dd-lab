@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Webpack App</title>
+      <script src="//code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="box">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-lg-offset-2 col-md-4 col-sm-4 col-xs-12">
+                  <div class="box-part text-center">
+                     <div class="title">
+                        <h3>Address book</h3>
+                     </div>
+                     <div class="text">
+                        <input id="search" type="text" placeholder="filter...">
+                     </div>
+                     <div id="users">
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div class="box-part text-center">
+                     <img id="avatar" class="profile" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?h=350&auto=compress&cs=tinysrgb" />
+                     <div class="title">
+                        <h3 id="name">Alexandr</h3>
+                     </div>
+                     <div class="text">
+                        <span>email: <span id="email">Front End Developer</span></span>
+                     </div>
+                     <div class="text">
+                        <span>phone: <span id="phone">+7-123-456-789</span></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <script type="text/javascript">
+         $(function(){
+            let users = [];
+
+            $.getJSON('users.json', function(data) {
+               users = data;
+               data.forEach(function(item, i, data) {
+                  $('#users').append("<div class='user'><a href='#' data-id='"+item.id+"'>"+item.name+"</a><br></div>");
+               });
+               
+            });
+
+            $(document.body).on('click', 'div.user a', function(e){
+               e.preventDefault();
+               const user = users.filter((user) => $(this).data('id') === +user.id);
+               $("#name").text(user[0].name);
+               $("#email").text(user[0].email);
+               $("#phone").text(user[0].phone);
+               $("#avatar").attr('src', user[0].avatar);
+            })
+
+            $('#search').on('keyup', function(e) {
+               console.log(e.target.value);
+               const search = e.target.value;
+               const filterUsers = users.filter(
+                  (user) => {
+                     let searchString = '';
+                     let searchValue = search.replace(/.*:/i,'');
+                     if (search.indexOf(':') !== -1) {
+                        const field = search.replace(/:.*/i,'');
+                        searchString = user[field].toLowerCase();
+                     } else {
+                        searchString = user.name.toLowerCase()
+                                         + user.email.toLowerCase()
+                                         + user.phone.toLowerCase();
+                     }
+                     return searchString.indexOf(
+                        searchValue.toLowerCase()) !== -1;
+                  }
+               )
+               console.log(filterUsers)
+               filteredIds = [];
+               filterUsers.forEach(function(user, i, data) {
+                  filteredIds.push(user.id)
+               });
+               console.log(filteredIds)
+               $('#users .user a').each(function() {
+                  const id = $(this).data('id').toString();
+                  console.log(id)
+                  if (filteredIds.includes(id)) {
+                     $(this).parent().show()
+                  } else {
+                     $(this).parent().hide()
+                  }
+               });
+               
+            });
+         });
+
+            
+      </script>
+   </body>
+</html>
