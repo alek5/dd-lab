@@ -1,0 +1,184 @@
+// Импортируем внешние библиотеки
+@import '~reboot.css'; // ~ для импорта npm пакетов, для css нужно указывать расширение
+@import '~include-media/dist/include-media';
+// Подключаем свои
+//@import
+    //'_mixins',
+    //'components/_footer',
+    //'components/_header'
+    //;
+
+* {
+	box-sizing: border-box;
+}
+
+$breakpoints: (
+  'phone': 800px,
+  'tablet': 1000px,
+  'desktop': 3000px
+);
+
+body {
+    //@include customBlockStyling(#333);
+    background: #5fd895;
+
+    @include media('<phone'){
+    	.itemgroup1, 
+    	.itemgroup2, {
+    		width: 100%;
+    	}
+		.itemgroup3 {
+			flex-direction: column;
+		}
+		.header {
+			flex-direction: column;
+			margin: 0px;
+		}
+		.item-of-header {
+			align-items: center;
+			margin: 0px;
+		}
+		.container {
+			margin: 0;
+		}
+		.sign {
+			order: -2;
+		}
+		.item-of-header-1 {
+			order: -1;
+			background: #5fd895;
+		}
+    }
+
+    @include media('>=phone', '<=tablet'){
+    	.itemgroup1{
+    		width: calc(100% / 12 * 6);
+    	}
+    	.itemgroup2 {
+    		width: calc(100% / 12 * 6);
+    	}
+    	.header {
+    		margin: .5vw;
+    	}
+    	.container {
+			margin: .5vw;
+		}
+
+    }
+
+    @include media('>tablet'){
+		.item2 > img {
+			//background-position: right 10px top;
+		}
+    }
+}
+
+h1 {
+	color: #fff;
+}
+
+h3, p, span {
+	padding: 10px 10px;
+}
+
+p, span {
+	font-size: .8rem;
+}
+
+.title {
+	text-align: center;
+}
+
+.header {
+	//background: #5fd895 + 50%;
+	display: flex;
+	padding: 0px 20px;
+	justify-content: space-around;
+	margin: 0 15vw;
+
+}
+
+.item-of-header {
+	background: #fff;
+	padding: 10px 20px;
+	justify-content: space-around;
+	margin: 0 5px;
+}
+
+.item-of-header-1 {
+	flex-grow: 2;
+	background: #5fd895 + 50%;
+}
+
+.container {
+	margin: 0 15vw;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	margin: 8px;
+}
+
+.itemgroup1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: calc(100% / 12 * 4);
+}
+
+.itemgroup2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: calc(100% / 12 * 8);
+}
+
+.itemgroup3 {
+	display: flex;
+	justify-content: center;
+}
+
+.itemgroup4 {
+	display: flex;
+	justify-content: center;
+	padding: -10px -20px;
+}
+
+.author-comments {
+	display: flex;
+	align-items: flex-end;
+	margin-top: 10px;
+	flex-grow: 1;
+}
+
+.author {
+	align-items: flex-start;
+	flex: 1;
+	font-size: .7rem;
+}
+
+.comments {
+	align-items: flex-end;
+	text-align: right;
+	flex: 1;
+	font-size: .7rem;
+}
+
+img {
+	width: 100%;
+	height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.item-image {
+	margin: 8px 8px 8px -8px;
+}

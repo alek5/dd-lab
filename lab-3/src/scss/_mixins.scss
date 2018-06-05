@@ -1,0 +1,4 @@
+@mixin customBlockStyling($color) {
+    background: $color;
+    border: 50px solid lighten($color, 50);
+}
